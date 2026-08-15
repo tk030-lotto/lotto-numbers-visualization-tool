@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "ai-context-manager-mcp": {
+      "command": "node",
+      "args": [
+        "C:/Users/tk030/Desktop/AI開発コンテキスト管理MCPツール/dist/index.js"
+      ],
+      "env": {
+        "AI_CONTEXT_ALLOWED_ROOTS": "C:/Users/tk030/Desktop"
+      }
+    }
+  }
+}
