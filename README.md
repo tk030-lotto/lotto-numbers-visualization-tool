@@ -1,136 +1,129 @@
-# LOTO 構造解析システム
+# ロト＆ナンバーズ 統合構造解析・可視化ツール
 
-ロト6・ロト7・ミニロトの当選番号を解析・可視化するStreamlitアプリケーションです。
+ロト（ロト7・ロト6・ミニロト）およびナンバーズ（ナンバーズ3・ナンバーズ4）の過去出目データを解析・可視化するWebアプリケーションです。  
+※本ツールは買い目の自動生成・予想ではなく、過去出目データの純粋な構造解析・パターン分析・出目表可視化を目的としています。
 
-## 機能
+---
 
-- **構成解析**: 奇偶比・合計値・数字帯・末尾被り・連番・引っ張り・スライドなど基本指標の集計
-- **出現頻度分類**: 直近N回の当選データから HOT/GOLD/WEAK/COLD を分類
-- **トレンド表示**: 合計値の推移をグラフで表示
-- **出目表**: 最新N回の当選番号を色分け表示（引っ張り・スライド強調）
-- **自動データ更新**: loto-life.net から最新CSV取得・自動同期
+## 主な機能
 
-## インストール
+### 1. 構成解析
+- **奇偶比**: 奇数と偶数の構成比率を集計。
+- **合計値 & 判定**: 当選番号の合計値および黄金ゾーン（ロト）/ 期待値ゾーン（ナンバーズ）の適正判定。
+- **数字帯分布**: 10区切り（1〜10、11〜20、21〜30、31〜）での出現分布。
+- **末尾被り**: 下一桁の数字の重複有無を集計。
+- **連番**: 連続する数字の組み合わせを検出。
+- **引っ張り**: 前回抽選数字からの連続出現を検出。
+- **スライド**: 前回抽選数字の ±1 の数字の出現を検出。
+- **ナンバーズ型判定**: シングル / ダブル / トリプル / フォース のパターン分類。
 
-### 前提条件
-- Python 3.8+
-- pip
+### 2. 出現頻度分類 (F式)
+直近N回の当選データから全数字を4段階に分類：
+- **HOT**: 5回以上出現
+- **GOLD**: 3〜4回出現
+- **RECOVERY**: 2回出現
+- **COLD**: 0〜1回出現
 
-### セットアップ
+### 3. スライド・マクロ分析 (川の流れ)
+- 前々回の当選番号から周辺±3マス内に流入した数字を検出・可視化（ロト系）。
 
-```bash
-# 依存パッケージをインストール
-pip install -r requirements.txt
-```
+### 4. マクロトレンドグラフ
+- 直近N回の合計値推移折れ線グラフ（Recharts）。
+- 黄金ゾーン上下限ライン、ナンバーズ中央期待値ラインを表示。
+- 各ポイントへのホバーによる回号・日付・当選番号・合計値ツールチップ表示。
 
-## 実行
+### 5. 直近詳細メトリクス一覧表
+- 直近N回の回号別指標（合計値、奇偶比、連番、引っ張り、スライド、型など）を整理したテーブル。
 
-```bash
-# Streamlitアプリを起動（デフォルトはロト7）
-streamlit run app.py
-```
-
-ブラウザで自動的に http://localhost:8501 が開きます。
-
-## ファイル構成
-
-```
-.
-├── app.py                 # メインUI・レイアウト
-├── analyzer.py            # 解析ロジック（指標計算）
-├── config.py              # ロト種別ごとの設定・定数
-├── utils.py               # CSV読み込み・ダウンロード
-├── styles.py              # Streamlitのカスタムスタイル
-├── requirements.txt       # 依存パッケージ
-├── .gitignore             # Git除外ファイル
-├── ロト6.csv              # ロト6の当選データ
-├── ロト7.csv              # ロト7の当選データ
-└── ミニロト.csv           # ミニロトの当選データ
-```
-
-## 使い方
-
-### 基本操作
-
-1. **ロト種選択**: 画面上部から「ロト7」「ロト6」「ミニロト」を選択
-2. **最新データ取得**: 「🔄 最新データ取得」ボタンでloto-life.netから最新CSVをダウンロード（オプション）
-3. **表示設定**: サイドバーで
-   - 表示モード（PC版/スマホ版）
-   - 出目表・頻度の集計回数
-   - トレンドグラフの表示回数
-   - メトリクス表示数
-
-### 表示内容
-
-- **構成解析**: 当選番号の基本パターン（奇偶・合計・ゾーン等）
-- **出現頻度**: HOT（5回以上）/ GOLD（3〜4回）/ WEAK（2回）/ COLD（0〜1回）
-- **スライド・マクロ**: 前々回の周辺±3マス内の当選番号流入
-- **メトリクス**: 直近N回の詳細指標一覧
-- **出目表**: 色分け表示
+### 6. 出目表 (Occurrence Matrix)
+- **ロト系**: 1〜37（ロト7） / 1〜43（ロト6） / 1〜31（ミニロト） × 回号。
+- **ナンバーズ系**: 0〜9 × 回号（同一回の複数出現時は重複カウントバッジを表示）。
+- **色分け表示**:
   - 🟨 通常当選（黄）
   - 🟦 引っ張り（青） — 前回出現
   - 🟩 スライド（緑） — 前回±1
+- **表示モード**: PC版（横スクロール） / スマホ版（縦向き最適化）の切り替え。
 
-## 注意事項
+### 7. 拡張分析機能
+- **数字個別詳細パネル**: 出目表や頻度カードの数字をクリックした際に対象数字の未出現スパン、過去最大スパン、共起上位ペア、スライド流入実績を表示。
+- **共起ペア相性分析**: 直近N回で同時に出現したペアの頻度ランキングを集計。
+- **未出現スパン分析**: 各数字の現在の連続未出現回数および過去最大スパンを一覧表示。
+- **ナンバーズ桁別ヒートマップ**: 百・十・一・千の位における各数字の出現分布を可視化。
+- **出目表インタラクティブフィルター**: 引っ張り・スライド・奇数・偶数・数字帯のハイライトトグル。
+- **基準回号選択（遡り検証）**: 過去の任意の回号を基準点として指定し、当時のデータで再計算・表示。
+- **Markdownレポート出力**: 解析結果およびメトリクスをMarkdown形式でクリップボードに出力。
 
-### データ取得
+---
 
-- **自動更新**: アプリ起動時にロト種ごと1回、loto-life.netからCSVを自動ダウンロード
-- **ネットワーク依存**: インターネット接続が必要です（取得失敗時はログに記録）
-- **更新失敗時**: [ロト種].csv をダウンロード・手動配置してください
+## 技術スタック
 
-### 性能
+- **フロントエンド**: React 18 / TypeScript 5.6+ / Vite 5
+- **スタイリング**: Vanilla CSS（プロジェクト統計ツール準拠のデザインシステムトークン）
+- **グラフライブラリ**: Recharts
+- **アイコン**: Lucide React
+- **公開形式**: 静的SPA（GitHub Pages対応）
 
-- `history_count` を 50+ に設定すると出目表の描画が遅くなる可能性があります
-- 大量の当選データ（1000回以上）を扱う場合、事前にDataFrameのメモリ最適化を推奨
+---
 
-### キャッシング
+## 開発・ビルド手順
 
-- `load_loto_data()` は `@st.cache_data` でキャッシュ
-- 手動更新後は内部的に `load_loto_data.clear()` で無効化
+### 前提条件
+- Node.js 18.0.0 以上
+- npm 9.0.0 以上
 
-## ロジック
-
-### 出現頻度分類（F式）
-
-直近`history_count`回分の全当選番号をカウント：
-
-- **HOT**: 5回以上出現
-- **GOLD**: 3〜4回出現
-- **WEAK**: 2回出現
-- **COLD**: 0〜1回出現
-
-### スライド・マクロ分析
-
-前々回の当選番号の周辺±3マス内に落ちた数字を「川の流れ」として強調。
-
-## トラブルシューティング
-
-| 問題 | 原因 | 解決方法 |
-|------|------|--------|
-| `ModuleNotFoundError` | 依存パッケージ不足 | `pip install -r requirements.txt` を再実行 |
-| ファイルが見つからない | CSVファイルが無い | loto-life.net からダウンロードするか、手動配置 |
-| 文字コードエラー | Shift-JIS/UTF-8の混在 | utils.py で自動フォールバック処理済み |
-| データ更新に失敗 | ネット接続 or サーバ側エラー | `data_update_error.log` をチェック |
-
-## ログ
-
-エラーログは `data_update_error.log` に追記されます。
-
+### セットアップ
+```bash
+# 依存関係のインストール
+npm install
 ```
-2026-05-08T10:30:45.123456 - download_latest_csv failed for ロト7: Connection timeout
-...
+
+### ローカル開発サーバー起動
+```bash
+npm run dev
 ```
+
+### プロダクションビルド
+```bash
+npm run build
+```
+
+---
+
+## データ取得仕様
+
+- **データソース**: `https://tk030-lotto.github.io/lotto-data-hub/data/${gameKey}.json`
+- **対象キー**: `loto7`, `loto6`, `miniloto`, `numbers3`, `numbers4`
+- **動作**: 起動時およびくじ種切り替え時にバックグラウンドで最新JSONを自動非同期フェッチ。オフライン時は内蔵プリロードデータにフォールバック。
+
+---
+
+## 免責事項
+
+- 本ツールは過去データの統計・構造解析および可視化を目的としており、将来の当選を保証するものではありません。
+- 宝くじの購入は自己責任において行ってください。
+
+---
 
 ## ライセンス
 
-MIT
+MIT License
 
-## 作者
+Copyright (c) 2026 tk030-lotto
 
-tk030-loto
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## 参考リンク
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-- [loto-life.net](https://loto-life.net/)
-- [Streamlit Documentation](https://docs.streamlit.io/)
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
