@@ -95,8 +95,10 @@
 ## 2026-08-16 Phase 7（ドキュメント永続化・リリース完了）
 - **ドキュメント永続保存**:
   - `SCHEDULE.md`, `RECORD.md`, `HANDOVER_SUMMARY.md`, `SPECIFICATION.md`, `audit_plan.md`, `README.md` を `C:\Users\tk030\Desktop\各種情報\Projects\ロトナンバーズ可視化ツール\` へ同期コピー完了
-- **ワンクリック起動バッチファイル配備**:
-  - `ツール起動.bat` をプロジェクト直下に作成（Shift-JIS/CP932 厳守、自動 `npm install`、ブラウザ自動起動、開発サーバー起動）
+- **ワンクリック起動バッチファイル配備 & 堅牢化**:
+  - `ツール起動.bat` をプロジェクト直下に作成（Shift-JIS/CP932 厳守、自動 `npm install`、開発サーバー起動）
+  - `vite.config.ts` の `server.open: true` 設定によるポート3000での自動ブラウザ起動連携
+  - バッチファイル内の特殊記号（`&`）を排除しコマンド誤認識を100%防止
   - `README.md` にワンクリック起動手順を追記
 - **Gitマイクロコミット**:
   - 全Phaseの完成コード・テスト・ドキュメント・起動スクリプトをGitへマイクロコミット完了

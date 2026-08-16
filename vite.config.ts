@@ -7,7 +7,7 @@ export default defineConfig({
   base: './', // GitHub Pages用相対パス
   server: {
     port: 3000,
-    open: false,
+    open: true,
   },
   build: {
     outDir: 'dist',
