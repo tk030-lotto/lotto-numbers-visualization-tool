@@ -36,3 +36,16 @@
 - Markdownレポート出力（`src/utils/reportExporter.ts`）: 仕様書フォーマット準拠・クリップボードコピー
 - 統合解析オーケストレーター（`src/utils/index.ts`）: 全解析ロジックの一括実行・型安全返却
 - Gate 2 監査完了: 単体計算精度テスト（`src/utils/__tests__/testCalculations.ts`）全件パス、`tsc --noEmit` エラー0件、全ファイル300行以内遵守、静的ビルド（`npm run build`）成功、MCPツール `generate_phase_summary` 実行
+
+## 2026-08-16 Phase 3（コアUI・統合レポート・出目表実装）実装完了
+- ヘッダー（`src/components/Header.tsx`）: アプリタイトル、5くじ種タブセレクター、データ同期ステータスバッジ（最新🟢/キャッシュ🟡/内蔵⚪/エラー🔴）、再取得機能
+- サイドバー設定（`src/components/SidebarSettings.tsx`）: 集計回数スライダー（10〜100回）、基準回号選択（タイムトラベル過去検証）、表示設定（ボーナス数字トグル）、出目表ハイライトフィルター
+- 構成解析カード（`src/components/MetricCard.tsx`）: 奇偶比バー、合計値＆黄金ゾーン/期待値判定、連番、引っ張り（青）、スライド（緑）、末尾被り、ナンバーズ型判定
+- 出現頻度カード（`src/components/FrequencyCard.tsx`）: F式出現頻度分類（HOT/GOLD/RECOVERY/COLD）グリッド、数字バッジ・出現回数・出現率表示
+- 統合分析レポート（`src/components/IntegratedReport.tsx`）: 基準回抽せん結果ボール表示、主要指標＆F式頻度カード統合、Markdownレポートクリップボード出力
+- 出目表凡例（`src/components/MatrixLegend.tsx`）: 引っ張り（青）、スライド（緑）、通常当選（黄）、ボーナス（紫）、重複バッジの説明
+- 出目表マトリクス（`src/components/OccurrenceMatrix.tsx`）: ロト（1〜37/43/31）およびナンバーズ（0〜9・重複バッジ）統合出目表、固定ヘッダー、色分けボール、横スクロールコンテナ
+- メイン統合（`src/App.tsx`）: 状態管理、非同期データフェッチ、統合解析エンジン連携、レスポンシブレイアウト
+- デザインシステム（`src/index.css`）: スライダー、セレクト、出目表テーブル、ボタンスタイルの拡充
+- Gate 3 監査完了: `tsc --noEmit` エラー0件、全ファイル300行以内厳守、静的ビルド（`npm run build`）成功、MCPツール `generate_phase_summary` 実行
+

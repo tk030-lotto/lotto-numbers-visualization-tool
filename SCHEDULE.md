@@ -24,7 +24,7 @@
 [Phase 0: 仕様・基盤定義]  ██████████ 100% (完了)
 [Phase 1: 環境構築・基盤]  ██████████ 100% (完了)
 [Phase 2: 解析ロジック]    ██████████ 100% (完了)
-[Phase 3: コアUI・出目表]  ░░░░░░░░░░   0% (未着手)
+[Phase 3: コアUI・出目表]  ██████████ 100% (完了)
 [Phase 4: 拡張機能・グラフ]░░░░░░░░░░   0% (未着手)
 [Phase 5: 4段階品質監査]   ░░░░░░░░░░   0% (未着手)
 [Phase 6: 統合検証・ビルド]░░░░░░░░░░   0% (未着手)
@@ -95,11 +95,11 @@
 
 | Step | タスク項目 | 対象ファイル | 依存関係 | 完了条件 | ステータス |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 3.1 | ヘッダー & 同期ステータスバッジ | `src/components/Header.tsx` | 1.2, 2.1 | 5くじ種タブ切替、同期状態インジケーター（🟢/🟡/⚪）表示 | 未着手 |
-| 3.2 | サイドバー設定パネル | `src/components/SidebarSettings.tsx` | 1.2, 1.3 | 集計回数スライダー、基準回号選択、フィルター切替 | 未着手 |
-| 3.3 | 統合分析レポート & メトリクスカード | `src/components/IntegratedReport.tsx`<br>`src/components/MetricCard.tsx`<br>`src/components/FrequencyCard.tsx` | 2.2, 2.3, 2.4 | 基本指標グリッド、F式出現頻度分類カード表示 | 未着手 |
-| 3.4 | 出目表マトリクス & 凡例 | `src/components/OccurrenceMatrix.tsx`<br>`src/components/MatrixLegend.tsx` | 2.5 | ロト（1〜37/43/31）およびナンバーズ（0〜9・重複バッジ）出目表描画 | 未着手 |
-| 🔍 | **Gate 3 監査 & サマリー** | - | 3.1〜3.4 | UIデザインシステム適合性検証、出目表描画性能確認、`generate_phase_summary` 実行 | 未着手 |
+| 3.1 | ヘッダー & 同期ステータスバッジ | `src/components/Header.tsx` | 1.2, 2.1 | 5くじ種タブ切替、同期状態インジケーター（🟢/🟡/⚪）表示 | ✅ 完了 |
+| 3.2 | サイドバー設定パネル | `src/components/SidebarSettings.tsx` | 1.2, 1.3 | 集計回数スライダー、基準回号選択、フィルター切替 | ✅ 完了 |
+| 3.3 | 統合分析レポート & メトリクスカード | `src/components/IntegratedReport.tsx`<br>`src/components/MetricCard.tsx`<br>`src/components/FrequencyCard.tsx` | 2.2, 2.3, 2.4 | 基本指標グリッド、F式出現頻度分類カード表示 | ✅ 完了 |
+| 3.4 | 出目表マトリクス & 凡例 | `src/components/OccurrenceMatrix.tsx`<br>`src/components/MatrixLegend.tsx` | 2.5 | ロト（1〜37/43/31）およびナンバーズ（0〜9・重複バッジ）出目表描画 | ✅ 完了 |
+| 🔍 | **Gate 3 監査 & サマリー** | - | 3.1〜3.4 | UIデザインシステム適合性検証、出目表描画性能確認、`generate_phase_summary` 実行 | ✅ 完了 |
 
 ---
 
