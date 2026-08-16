@@ -6,11 +6,12 @@
 
 import React, { useState } from 'react';
 import { SpanRankItem } from '../types/analysis';
+import { GameConfig } from '../types/config';
 import { Clock } from 'lucide-react';
 
 interface SpanRankingCardProps {
   spanRanking: SpanRankItem[];
-  gameConfig?: any;
+  gameConfig?: GameConfig;
   analysisCount: number;
   onNumberClick?: (num: number) => void;
 }

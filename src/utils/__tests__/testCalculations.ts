@@ -88,6 +88,32 @@ const reportMd = generateMarkdownReport(integrated, GAME_CONFIGS.loto7);
 assert(reportMd.includes('# ロト＆ナンバーズ 統合構造解析レポート'), 'Markdown report title included');
 assert(reportMd.includes('ロト7 (LOTO 7)'), 'Game label included in report');
 
+console.log('\n--- 8. 5くじ種 網羅検証テスト (LOTO6, MINILOTO, N4) ---');
+const loto6Data = PRELOAD_DATA_MAP.loto6 as LotoRound[];
+const loto6Integrated = runIntegratedAnalysis(loto6Data, 0, 10, GAME_CONFIGS.loto6);
+assert(loto6Integrated.frequencies.length === 43, `LOTO6 frequencies count is 43`);
+assert(loto6Integrated.spanRanking.length === 43, `LOTO6 span rankings count is 43`);
+
+const miniData = PRELOAD_DATA_MAP.miniloto as LotoRound[];
+const miniIntegrated = runIntegratedAnalysis(miniData, 0, 10, GAME_CONFIGS.miniloto);
+assert(miniIntegrated.frequencies.length === 31, `MiniLoto frequencies count is 31`);
+
+const n4Data = PRELOAD_DATA_MAP.numbers4 as NumbersRound[];
+const n4Integrated = runIntegratedAnalysis(n4Data, 0, 10, GAME_CONFIGS.numbers4);
+assert(n4Integrated.frequencies.length === 10, `Numbers4 frequencies count is 10`);
+assert(n4Integrated.digitDistributions !== undefined, `Numbers4 has digit distributions`);
+assert(n4Integrated.digitDistributions?.length === 4, `Numbers4 has 4 digit positions`);
+
+console.log('\n--- 9. ±3マクロ流入・スパン・相性ランキング拡張テスト ---');
+// ±3マクロ
+assert(loto7Metric.slideNumbers !== undefined, 'Loto7 has slideNumbers');
+assert(Array.isArray(loto7Metric.slideNumbers), 'slideNumbers is array');
+
+// 相性 Top 10
+const top10Synergy = calculateSynergyPairs(loto7Data, GAME_CONFIGS.loto7, 10);
+assert(top10Synergy.length <= 10, 'Top 10 synergy pairs length <= 10');
+
 console.log('\n========================================');
-console.log('🎉 ALL PHASE 2 UNIT TESTS PASSED!');
+console.log('🎉 ALL COMPREHENSIVE AUDIT TESTS PASSED!');
 console.log('========================================');
+

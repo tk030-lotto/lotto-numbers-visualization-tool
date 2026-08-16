@@ -45,7 +45,21 @@ export const MacroTrendChart: React.FC<MacroTrendChartProps> = ({
   const expectedSum = gameConfig.sumThresholds.centerAverage;
 
   // カスタムツールチップ
-  const CustomTooltip = ({ active, payload }: any) => {
+  interface CustomTooltipProps {
+    active?: boolean;
+    payload?: Array<{
+      payload: {
+        round: number;
+        roundLabel: string;
+        date: string;
+        sum: number;
+        isGolden: boolean;
+        numbers: string;
+      };
+    }>;
+  }
+
+  const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
