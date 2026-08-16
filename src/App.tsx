@@ -21,6 +21,7 @@ import { MacroTrendChart } from './components/MacroTrendChart';
 import { RecentMetricsTable } from './components/RecentMetricsTable';
 import { Footer } from './components/Footer';
 import { NumberDetailModal } from './components/NumberDetailModal';
+import { MatrixDisplayMode } from './types/config';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 
 export const App: React.FC = () => {
@@ -31,6 +32,9 @@ export const App: React.FC = () => {
   const [showBonus, setShowBonus] = useState<boolean>(true);
   const [highlightFilter, setHighlightFilter] = useState<HighlightFilterType>('all');
   const [selectedNumberForModal, setSelectedNumberForModal] = useState<number | null>(null);
+  const [displayMode, setDisplayMode] = useState<MatrixDisplayMode>(() => {
+    return typeof window !== 'undefined' && window.innerWidth <= 768 ? 'mobile' : 'desktop';
+  });
 
   // データ同期状態
   const [allRounds, setAllRounds] = useState<LotteryRound[]>(PRELOAD_DATA_MAP['loto7']);
@@ -104,10 +108,12 @@ export const App: React.FC = () => {
         totalRounds={allRounds.length}
         onRefresh={() => loadData(selectedGame)}
         isLoading={isLoading}
+        displayMode={displayMode}
+        onToggleDisplayMode={setDisplayMode}
       />
 
       {/* Main Layout: Sidebar + Content Area */}
-      <div className="main-layout">
+      <div className={`main-layout ${displayMode === 'mobile' ? 'mode-mobile' : ''}`}>
         {/* Left Sidebar */}
         <SidebarSettings
           gameConfig={currentConfig}
@@ -207,6 +213,8 @@ export const App: React.FC = () => {
                 showBonus={showBonus}
                 highlightFilter={highlightFilter}
                 onNumberClick={(num) => setSelectedNumberForModal(num)}
+                displayMode={displayMode}
+                onToggleDisplayMode={setDisplayMode}
               />
 
               {/* 6. Recent Metrics Detail Grid */}

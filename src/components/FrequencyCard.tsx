@@ -75,7 +75,7 @@ export const FrequencyCard: React.FC<FrequencyCardProps> = ({
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <BarChart2 size={18} color="var(--accent-gold)" />
-          <h2 style={{ fontSize: '14px', fontWeight: 600, margin: 0 }}>F式 出現頻度分類</h2>
+          <h2 style={{ fontSize: '14px', fontWeight: 600, margin: 0 }}>出現頻度分類</h2>
         </div>
         <span className="text-muted font-mono" style={{ fontSize: '11px' }}>
           集計期間: 直近 {analysisCount} 回

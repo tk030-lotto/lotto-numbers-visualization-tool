@@ -252,3 +252,32 @@ select:focus {
   color: var(--text-muted);
   font-size: 11px;
 }
+
+/* Mobile Optimized Matrix Styles */
+.matrix-container-mobile .matrix-table {
+  font-size: 11px;
+}
+
+.matrix-container-mobile .matrix-table th,
+.matrix-container-mobile .matrix-table td {
+  padding: 4px 1px;
+}
+
+.matrix-container-mobile .matrix-round-header {
+  min-width: 50px;
+  font-size: 10px;
+}
+
+.matrix-container-mobile .matrix-date-header {
+  display: none; /* スマホモードでは日付列を非表示にして横幅を節約 */
+}
+
+.matrix-container-mobile .num-ball {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 9px !important;
+}
+
+.mode-mobile {
+  grid-template-columns: 1fr !important;
+}

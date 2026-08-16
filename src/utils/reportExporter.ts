@@ -61,7 +61,7 @@ export function generateMarkdownReport(
   }
   lines.push('');
 
-  lines.push(`## 2. F式 出現頻度分類 (直近 ${result.targetRounds.length} 回)`);
+  lines.push(`## 2. 出現頻度分類 (直近 ${result.targetRounds.length} 回)`);
   lines.push(`- **HOT (5回以上)**: ${hotNumbers.length > 0 ? hotNumbers.map((n) => String(n).padStart(2, '0')).join(', ') : 'なし'}`);
   lines.push(`- **GOLD (3〜4回)**: ${goldNumbers.length > 0 ? goldNumbers.map((n) => String(n).padStart(2, '0')).join(', ') : 'なし'}`);
   lines.push(`- **RECOVERY (2回)**: ${recoveryNumbers.length > 0 ? recoveryNumbers.map((n) => String(n).padStart(2, '0')).join(', ') : 'なし'}`);

@@ -104,7 +104,7 @@ async function runPhase6AcceptanceTests() {
     assert(md.includes('# ロト＆ナンバーズ 統合構造解析レポート'), `${gameKey} Markdown report title check`);
     assert(md.includes(config.label), `${gameKey} Markdown report label check`);
     assert(md.includes('## 1. 構成解析指標'), `${gameKey} Markdown report section 1 check`);
-    assert(md.includes('## 2. F式 出現頻度分類'), `${gameKey} Markdown report section 2 check`);
+    assert(md.includes('## 2. 出現頻度分類'), `${gameKey} Markdown report section 2 check`);
     assert(md.includes('## 3. 未出現スパン'), `${gameKey} Markdown report section 3 check`);
     assert(md.includes('## 4. 共起ペア相性'), `${gameKey} Markdown report section 4 check`);
   }

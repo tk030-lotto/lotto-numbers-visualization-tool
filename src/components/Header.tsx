@@ -6,7 +6,8 @@
 import React from 'react';
 import { GameKey, SyncStatus } from '../types/lottery';
 import { GAME_CONFIGS } from '../config/games';
-import { BarChart3, CheckCircle2, AlertCircle, RefreshCw, Database } from 'lucide-react';
+import { BarChart3, CheckCircle2, AlertCircle, RefreshCw, Database, Monitor, Smartphone } from 'lucide-react';
+import { MatrixDisplayMode } from '../types/config';
 
 interface HeaderProps {
   selectedGame: GameKey;
@@ -16,6 +17,8 @@ interface HeaderProps {
   totalRounds?: number;
   onRefresh?: () => void;
   isLoading?: boolean;
+  displayMode: MatrixDisplayMode;
+  onToggleDisplayMode: (mode: MatrixDisplayMode) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -26,6 +29,8 @@ export const Header: React.FC<HeaderProps> = ({
   totalRounds,
   onRefresh,
   isLoading = false,
+  displayMode,
+  onToggleDisplayMode,
 }) => {
   const gameKeys: GameKey[] = ['loto7', 'loto6', 'miniloto', 'numbers4', 'numbers3'];
 
@@ -159,8 +164,63 @@ export const Header: React.FC<HeaderProps> = ({
         })}
       </div>
 
-      {/* Sync Status & Refresh Button */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+      {/* Right Controls: Display Mode Toggle + Sync Status & Refresh */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+        {/* Display Mode Toggle */}
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            backgroundColor: 'var(--bg-inset)',
+            border: '1px solid var(--border-color)',
+            borderRadius: 'var(--radius-md)',
+            padding: '2px',
+            gap: '2px',
+          }}
+          title="PC表示 / スマホ表示モード切替"
+        >
+          <button
+            onClick={() => onToggleDisplayMode('desktop')}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '4px 8px',
+              fontSize: '11px',
+              fontWeight: displayMode === 'desktop' ? 600 : 400,
+              borderRadius: 'var(--radius-sm)',
+              border: 'none',
+              cursor: 'pointer',
+              backgroundColor: displayMode === 'desktop' ? 'var(--accent-blue-bg)' : 'transparent',
+              color: displayMode === 'desktop' ? 'var(--accent-blue)' : 'var(--text-muted)',
+              transition: 'all var(--transition-fast)',
+            }}
+          >
+            <Monitor size={13} />
+            <span>PC</span>
+          </button>
+          <button
+            onClick={() => onToggleDisplayMode('mobile')}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '4px 8px',
+              fontSize: '11px',
+              fontWeight: displayMode === 'mobile' ? 600 : 400,
+              borderRadius: 'var(--radius-sm)',
+              border: 'none',
+              cursor: 'pointer',
+              backgroundColor: displayMode === 'mobile' ? 'var(--accent-blue-bg)' : 'transparent',
+              color: displayMode === 'mobile' ? 'var(--accent-blue)' : 'var(--text-muted)',
+              transition: 'all var(--transition-fast)',
+            }}
+          >
+            <Smartphone size={13} />
+            <span>スマホ</span>
+          </button>
+        </div>
+
         {renderSyncBadge()}
         {onRefresh && (
           <button
