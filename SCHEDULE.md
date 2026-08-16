@@ -16,13 +16,13 @@
 | **技術スタック** | React 18 / Vite 5 / TypeScript 5.6+ / Recharts / Lucide React / Vanilla CSS |
 | **対象くじ種** | ロト7 / ロト6 / ミニロト / ナンバーズ3 / ナンバーズ4（全5種） |
 | **データ取得方式** | 公開済み lotto-data-hub からの非同期自動取得 ＋ 内蔵フォールバック |
-| **全体ステータス** | **Phase 0 完了（仕様確定・リポジトリ初期化済） / Phase 1 準備中** |
+| **全体ステータス** | **Phase 1 完了（環境構築・基盤設計完了） / Phase 2 準備中** |
 
 ### マイルストーン進捗状況
 
 ```
 [Phase 0: 仕様・基盤定義]  ██████████ 100% (完了)
-[Phase 1: 環境構築・基盤]  ░░░░░░░░░░   0% (未着手)
+[Phase 1: 環境構築・基盤]  ██████████ 100% (完了)
 [Phase 2: 解析ロジック]    ░░░░░░░░░░   0% (未着手)
 [Phase 3: コアUI・出目表]  ░░░░░░░░░░   0% (未着手)
 [Phase 4: 拡張機能・グラフ]░░░░░░░░░░   0% (未着手)
@@ -67,11 +67,11 @@
 
 | Step | タスク項目 | 対象ファイル / ディレクトリ | 依存関係 | 完了条件 | ステータス |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1.1 | Vite + React + TS 初期化 & パッケージ導入 | `package.json`, `vite.config.ts`, `tsconfig.json` | - | `lucide-react`, `recharts` 導入、開発サーバー起動確認 | 未着手 |
-| 1.2 | デザインシステム & CSS変数定義 | `src/index.css` | 1.1 | JetBlackテーマ・カラーパレット・フォント・ユーティリティ定義 | 未着手 |
-| 1.3 | データ型・設定型・解析結果型定義 | `src/types/lottery.ts`<br>`src/types/config.ts`<br>`src/types/analysis.ts` | 1.1 | 5くじ種対応の完全な型定義（Strict準拠） | 未着手 |
-| 1.4 | 設定定数 & オフライン初期データ定義 | `src/config/games.ts`<br>`src/config/preloadData.ts` | 1.3 | 5くじ種の仕様定数および内蔵初期データの配備 | 未着手 |
-| 🔍 | **Gate 1 監査 & サマリー** | - | 1.1〜1.4 | 型チェック（`tsc --noEmit`）通過、`generate_phase_summary` 実行 | 未着手 |
+| 1.1 | Vite + React + TS 初期化 & パッケージ導入 | `package.json`, `vite.config.ts`, `tsconfig.json` | - | `lucide-react`, `recharts` 導入、開発サーバー起動確認 | ✅ 完了 |
+| 1.2 | デザインシステム & CSS変数定義 | `src/index.css` | 1.1 | JetBlackテーマ・カラーパレット・フォント・ユーティリティ定義 | ✅ 完了 |
+| 1.3 | データ型・設定型・解析結果型定義 | `src/types/lottery.ts`<br>`src/types/config.ts`<br>`src/types/analysis.ts` | 1.1 | 5くじ種対応の完全な型定義（Strict準拠） | ✅ 完了 |
+| 1.4 | 設定定数 & オフライン初期データ定義 | `src/config/games.ts`<br>`src/config/preloadData.ts` | 1.3 | 5くじ種の仕様定数および内蔵初期データの配備 | ✅ 完了 |
+| 🔍 | **Gate 1 監査 & サマリー** | - | 1.1〜1.4 | 型チェック（`tsc --noEmit`）通過、`generate_phase_summary` 実行 | ✅ 完了 |
 
 ---
 
