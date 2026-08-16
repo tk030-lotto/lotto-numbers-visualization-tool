@@ -108,12 +108,12 @@
 
 | Step | タスク項目 | 対象ファイル | 依存関係 | 完了条件 | ステータス |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 4.1 | スライドマクロ & ナンバーズ桁別ヒートマップ | `src/components/SlideMacroCard.tsx`<br>`src/components/DigitHeatmapCard.tsx` | 2.2, 2.3 | 前々回±3マクロ流入検出表示、千/百/十/一の位ヒートマップ表示 | 未着手 |
-| 4.2 | 共起ペア相性 & 未出現スパンランキング | `src/components/SynergyCard.tsx`<br>`src/components/SpanRankingCard.tsx` | 2.4, 2.5 | ペア相性ランキング、ハマり回数一覧カード表示 | 未着手 |
-| 4.3 | 数字個別詳細モーダル | `src/components/NumberDetailModal.tsx` | 2.2〜2.5 | 数字クリック時のスパン推移・共起・スライド実績モーダル表示 | 未着手 |
-| 4.4 | マクロトレンド折れ線グラフ (Recharts) | `src/components/MacroTrendChart.tsx` | 2.2, 2.3 | 合計値推移、黄金ゾーン/期待値ガイドライン、ツールチップ表示 | 未着手 |
-| 4.5 | 直近詳細メトリクス一覧テーブル & フッター | `src/components/RecentMetricsTable.tsx`<br>`src/components/Footer.tsx` | 2.2, 2.3 | 直近N回の詳細指標一覧、著作権・同期情報表示 | 未着手 |
-| 🔍 | **Gate 4 監査 & サマリー** | - | 4.1〜4.5 | 拡張機能の仕様網羅性検証、モーダル動作確認、`generate_phase_summary` 実行 | 未着手 |
+| 4.1 | スライドマクロ & ナンバーズ桁別ヒートマップ | `src/components/SlideMacroCard.tsx`<br>`src/components/DigitHeatmapCard.tsx` | 2.2, 2.3 | 前々回±3マクロ流入検出表示、千/百/十/一の位ヒートマップ表示 | ✅ 完了 |
+| 4.2 | 共起ペア相性 & 未出現スパンランキング | `src/components/SynergyCard.tsx`<br>`src/components/SpanRankingCard.tsx` | 2.4, 2.5 | ペア相性ランキング、ハマり回数一覧カード表示 | ✅ 完了 |
+| 4.3 | 数字個別詳細モーダル | `src/components/NumberDetailModal.tsx` | 2.2〜2.5 | 数字クリック時のスパン推移・共起・スライド実績モーダル表示 | ✅ 完了 |
+| 4.4 | マクロトレンド折れ線グラフ (Recharts) | `src/components/MacroTrendChart.tsx` | 2.2, 2.3 | 合計値推移、黄金ゾーン/期待値ガイドライン、ツールチップ表示 | ✅ 完了 |
+| 4.5 | 直近詳細メトリクス一覧テーブル & フッター | `src/components/RecentMetricsTable.tsx`<br>`src/components/Footer.tsx` | 2.2, 2.3 | 直近N回の詳細指標一覧、著作権・同期情報表示 | ✅ 完了 |
+| 🔍 | **Gate 4 監査 & サマリー** | - | 4.1〜4.5 | 拡張機能の仕様網羅性検証、モーダル動作確認、`generate_phase_summary` 実行 | ✅ 完了 |
 
 ---
 

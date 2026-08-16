@@ -47,5 +47,15 @@
 - 出目表マトリクス（`src/components/OccurrenceMatrix.tsx`）: ロト（1〜37/43/31）およびナンバーズ（0〜9・重複バッジ）統合出目表、固定ヘッダー、色分けボール、横スクロールコンテナ
 - メイン統合（`src/App.tsx`）: 状態管理、非同期データフェッチ、統合解析エンジン連携、レスポンシブレイアウト
 - デザインシステム（`src/index.css`）: スライダー、セレクト、出目表テーブル、ボタンスタイルの拡充
-- Gate 3 監査完了: `tsc --noEmit` エラー0件、全ファイル300行以内厳守、静的ビルド（`npm run build`）成功、MCPツール `generate_phase_summary` 実行
+## 2026-08-16 Phase 4（拡張分析機能・グラフ・モーダル実装）実装完了
+- スライドマクロ分析（`src/components/SlideMacroCard.tsx`）: ロト系専用・前々回±3マクロ流入分析カード
+- ナンバーズ桁別ヒートマップ（`src/components/DigitHeatmapCard.tsx`）: ナンバーズ専用・千/百/十/一の位出現ヒートマップカード
+- 共起ペア相性分析（`src/components/SynergyCard.tsx`）: 同時出現ペアランキング Top 10 カード
+- 未出現スパンランキング（`src/components/SpanRankingCard.tsx`）: 現在ハマり回数・最大ハマり回数ソート切り替えカード
+- 数字個別詳細モーダル（`src/components/NumberDetailModal.tsx`）: 出目ボール・頻度・共起ペアクリック時の深掘り詳細モーダル
+- マクロトレンド折れ線グラフ（`src/components/MacroTrendChart.tsx`）: Rechartsを用いた合計値推移折れ線グラフ（黄金ゾーン/期待値ライン・カスタムツールチップ）
+- 直近詳細メトリクス一覧テーブル（`src/components/RecentMetricsTable.tsx`）: 直近回号の詳細メトリクス一覧グリッド
+- フッター（`src/components/Footer.tsx`）: データ同期ステータス・総蓄積回数・MITライセンス・著作権表示
+- メイン統合（`src/App.tsx`）: 全拡張コンポーネント配置、モーダル開閉ステート管理、各コンポーネントとの双方向連携
+- Gate 4 監査完了: `tsc --noEmit` エラー0件、全ファイル300行以内厳守（最大245行）、静的ビルド（`npm run build`）成功、MCPツール `generate_phase_summary` 実行
 

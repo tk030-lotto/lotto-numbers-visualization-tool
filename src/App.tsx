@@ -13,6 +13,14 @@ import { Header } from './components/Header';
 import { SidebarSettings, HighlightFilterType } from './components/SidebarSettings';
 import { IntegratedReport } from './components/IntegratedReport';
 import { OccurrenceMatrix } from './components/OccurrenceMatrix';
+import { SlideMacroCard } from './components/SlideMacroCard';
+import { DigitHeatmapCard } from './components/DigitHeatmapCard';
+import { SynergyCard } from './components/SynergyCard';
+import { SpanRankingCard } from './components/SpanRankingCard';
+import { MacroTrendChart } from './components/MacroTrendChart';
+import { RecentMetricsTable } from './components/RecentMetricsTable';
+import { Footer } from './components/Footer';
+import { NumberDetailModal } from './components/NumberDetailModal';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
 
 export const App: React.FC = () => {
@@ -22,6 +30,7 @@ export const App: React.FC = () => {
   const [baseRoundIndex, setBaseRoundIndex] = useState<number>(0);
   const [showBonus, setShowBonus] = useState<boolean>(true);
   const [highlightFilter, setHighlightFilter] = useState<HighlightFilterType>('all');
+  const [selectedNumberForModal, setSelectedNumberForModal] = useState<number | null>(null);
 
   // データ同期状態
   const [allRounds, setAllRounds] = useState<LotteryRound[]>(PRELOAD_DATA_MAP['loto7']);
@@ -64,6 +73,7 @@ export const App: React.FC = () => {
     if (game === selectedGame) return;
     setSelectedGame(game);
     setBaseRoundIndex(0); // 基準回を最新にリセット
+    setSelectedNumberForModal(null);
     loadData(game);
   };
 
@@ -150,19 +160,83 @@ export const App: React.FC = () => {
                 analysisResult={analysisResult}
                 gameConfig={currentConfig}
                 analysisCount={analysisCount}
+                onNumberClick={(num) => setSelectedNumberForModal(num)}
               />
 
-              {/* 2. Occurrence Matrix Table */}
+              {/* 2. Slide Macro (Loto) or Digit Heatmap (Numbers) */}
+              {currentConfig.category === 'loto' ? (
+                <SlideMacroCard
+                  macroSlideFlows={analysisResult.macroSlideFlows}
+                  gameConfig={currentConfig}
+                  onNumberClick={(num) => setSelectedNumberForModal(num)}
+                />
+              ) : (
+                <DigitHeatmapCard
+                  digitDistributions={analysisResult.digitDistributions}
+                  gameConfig={currentConfig}
+                  analysisCount={analysisCount}
+                />
+              )}
+
+              {/* 3. Synergy Pairs & Span Ranking Grid */}
+              <div className="grid-2">
+                <SynergyCard
+                  synergyPairs={analysisResult.synergyPairs}
+                  gameConfig={currentConfig}
+                  analysisCount={analysisCount}
+                  onNumberClick={(num) => setSelectedNumberForModal(num)}
+                />
+                <SpanRankingCard
+                  spanRanking={analysisResult.spanRanking}
+                  gameConfig={currentConfig}
+                  analysisCount={analysisCount}
+                  onNumberClick={(num) => setSelectedNumberForModal(num)}
+                />
+              </div>
+
+              {/* 4. Macro Trend Line Chart */}
+              <MacroTrendChart
+                metricsList={analysisResult.recentMetricsList}
+                gameConfig={currentConfig}
+              />
+
+              {/* 5. Occurrence Matrix Table */}
               <OccurrenceMatrix
                 matrixRows={analysisResult.matrixRows}
                 gameConfig={currentConfig}
                 showBonus={showBonus}
                 highlightFilter={highlightFilter}
+                onNumberClick={(num) => setSelectedNumberForModal(num)}
+              />
+
+              {/* 6. Recent Metrics Detail Grid */}
+              <RecentMetricsTable
+                metricsList={analysisResult.recentMetricsList}
+                gameConfig={currentConfig}
+                onNumberClick={(num) => setSelectedNumberForModal(num)}
               />
             </>
           )}
         </main>
       </div>
+
+      {/* Footer */}
+      <Footer
+        syncStatus={syncStatus}
+        lastUpdated={lastUpdated}
+        totalRounds={allRounds.length}
+      />
+
+      {/* Number Detail Modal */}
+      {analysisResult && (
+        <NumberDetailModal
+          targetNumber={selectedNumberForModal}
+          analysisResult={analysisResult}
+          gameConfig={currentConfig}
+          onClose={() => setSelectedNumberForModal(null)}
+          onSelectOtherNumber={(num) => setSelectedNumberForModal(num)}
+        />
+      )}
     </div>
   );
 };
