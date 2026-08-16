@@ -23,7 +23,7 @@
 ```
 [Phase 0: 仕様・基盤定義]  ██████████ 100% (完了)
 [Phase 1: 環境構築・基盤]  ██████████ 100% (完了)
-[Phase 2: 解析ロジック]    ░░░░░░░░░░   0% (未着手)
+[Phase 2: 解析ロジック]    ██████████ 100% (完了)
 [Phase 3: コアUI・出目表]  ░░░░░░░░░░   0% (未着手)
 [Phase 4: 拡張機能・グラフ]░░░░░░░░░░   0% (未着手)
 [Phase 5: 4段階品質監査]   ░░░░░░░░░░   0% (未着手)
@@ -80,13 +80,13 @@
 
 | Step | タスク項目 | 対象ファイル | 依存関係 | 完了条件 | ステータス |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 2.1 | 非同期データフェッチャー実装 | `src/utils/dataFetcher.ts` | 1.3, 1.4 | 自動取得・フォールバック・キャッシュ機能の実装 | 未着手 |
-| 2.2 | ロト系指標解析ロジック実装 | `src/utils/lotoAnalyzer.ts` | 1.3, 1.4 | 奇偶比・合計値・黄金ゾーン・連番・引っ張り・スライド・±3マクロ解析 | 未着手 |
-| 2.3 | ナンバーズ系指標解析ロジック実装 | `src/utils/numbersAnalyzer.ts` | 1.3, 1.4 | 奇偶比・合計値・パターン型判定（S/D/T/F）・桁別分布解析 | 未着手 |
-| 2.4 | F式出現頻度・スパン解析ロジック実装 | `src/utils/frequencyAnalyzer.ts`<br>`src/utils/spanAnalyzer.ts` | 1.3 | HOT/GOLD/RECOVERY/COLD分類、未出現スパン・最大スパン計算 | 未着手 |
-| 2.5 | 共起ペア解析 & 出目表マトリクスビルダー | `src/utils/synergyAnalyzer.ts`<br>`src/utils/matrixBuilder.ts` | 1.3 | ペア出現頻度集計、出目表セルデータ構築（重複カウント・ハイライト判定） | 未着手 |
-| 2.6 | Markdownレポートエクスポーター | `src/utils/reportExporter.ts` | 1.3, 2.2, 2.3 | 分析結果をMarkdownテキスト化してクリップボード出力 | 未着手 |
-| 🔍 | **Gate 2 監査 & サマリー** | - | 2.1〜2.6 | 全解析ロジックの単体計算精度検証、`generate_phase_summary` 実行 | 未着手 |
+| 2.1 | 非同期データフェッチャー実装 | `src/utils/dataFetcher.ts` | 1.3, 1.4 | 自動取得・フォールバック・キャッシュ機能の実装 | ✅ 完了 |
+| 2.2 | ロト系指標解析ロジック実装 | `src/utils/lotoAnalyzer.ts` | 1.3, 1.4 | 奇偶比・合計値・黄金ゾーン・連番・引っ張り・スライド・±3マクロ解析 | ✅ 完了 |
+| 2.3 | ナンバーズ系指標解析ロジック実装 | `src/utils/numbersAnalyzer.ts` | 1.3, 1.4 | 奇偶比・合計値・パターン型判定（S/D/T/F）・桁別分布解析 | ✅ 完了 |
+| 2.4 | F式出現頻度・スパン解析ロジック実装 | `src/utils/frequencyAnalyzer.ts`<br>`src/utils/spanAnalyzer.ts` | 1.3 | HOT/GOLD/RECOVERY/COLD分類、未出現スパン・最大スパン計算 | ✅ 完了 |
+| 2.5 | 共起ペア解析 & 出目表マトリクスビルダー | `src/utils/synergyAnalyzer.ts`<br>`src/utils/matrixBuilder.ts` | 1.3 | ペア出現頻度集計、出目表セルデータ構築（重複カウント・ハイライト判定） | ✅ 完了 |
+| 2.6 | Markdownレポートエクスポーター | `src/utils/reportExporter.ts` | 1.3, 2.2, 2.3 | 分析結果をMarkdownテキスト化してクリップボード出力 | ✅ 完了 |
+| 🔍 | **Gate 2 監査 & サマリー** | - | 2.1〜2.6 | 全解析ロジックの単体計算精度検証、`generate_phase_summary` 実行 | ✅ 完了 |
 
 ---
 

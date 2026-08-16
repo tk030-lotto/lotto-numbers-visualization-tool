@@ -24,3 +24,15 @@
 - 定数マスター（`config/games.ts`）およびオフライン内蔵データ（`config/preloadData.ts`）配備
 - エントリーポイント（`src/main.tsx`, `src/App.tsx`）および静的ビルド検証（`npm run build`）完了
 - Gate 1 監査（TypeScript型チェックエラー0件、ビルド成功、`generate_phase_summary` 実行）完了
+
+## 2026-08-16 Phase 2（データ取得・解析ロジック実装）実装完了
+- 非同期データフェッチャー（`src/utils/dataFetcher.ts`）: lotto-data-hub連携・キャッシュ・フォールバック
+- ロト系指標解析（`src/utils/lotoAnalyzer.ts`）: 奇偶/合計/黄金ゾーン/連番/引っ張り/スライド/±3マクロ
+- ナンバーズ系指標解析（`src/utils/numbersAnalyzer.ts`）: 奇偶/合計/型判定［S/D/T/F］/桁別出現分布
+- F式出現頻度分類（`src/utils/frequencyAnalyzer.ts`）: HOT/GOLD/RECOVERY/COLD 判定
+- 未出現スパン解析（`src/utils/spanAnalyzer.ts`）: 現在ハマり回数・集計期間内最大スパン計算
+- 共起ペア相性解析（`src/utils/synergyAnalyzer.ts`）: 同時出現ペア出現数・出現率集計
+- 出目表マトリクスビルダー（`src/utils/matrixBuilder.ts`）: セル別属性判定・重複カウント
+- Markdownレポート出力（`src/utils/reportExporter.ts`）: 仕様書フォーマット準拠・クリップボードコピー
+- 統合解析オーケストレーター（`src/utils/index.ts`）: 全解析ロジックの一括実行・型安全返却
+- Gate 2 監査完了: 単体計算精度テスト（`src/utils/__tests__/testCalculations.ts`）全件パス、`tsc --noEmit` エラー0件、全ファイル300行以内遵守、静的ビルド（`npm run build`）成功、MCPツール `generate_phase_summary` 実行
