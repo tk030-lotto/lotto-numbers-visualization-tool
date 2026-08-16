@@ -1,27 +1,18 @@
 @echo off
-chcp 932 >nul
 cd /d "%~dp0"
-title ロト・ナンバーズ統合構造解析・出目表可視化ツール
+title Lotto-Numbers Visualization Tool
 
 echo ======================================================
-echo  ロト・ナンバーズ 統合構造解析・出目表可視化ツール
+echo  Lotto-Numbers Visualization Tool
 echo ======================================================
 echo.
 
 if not exist "node_modules\" (
-    echo [初期設定] 依存パッケージをインストールしています...
+    echo Installing dependencies...
     call npm install
-    if errorlevel 1 (
-        echo [エラー] npm install に失敗しました。Node.js がインストールされているか確認してください。
-        pause
-        exit /b 1
-    )
 )
 
-echo [起動] 開発サーバーを起動し、ブラウザを開きます...
-echo ※ 終了する場合はこのウィンドウを閉じるか Ctrl+C を押してください。
-echo.
-
+echo Starting dev server...
 call npm run dev
 
 pause
