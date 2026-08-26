@@ -25,12 +25,11 @@ export const SlideMacroCard: React.FC<SlideMacroCardProps> = ({
     return null;
   }
 
-  // 差分（-3〜+3）の集計
+  // 差分（±1, ±2, ±3）の集計
   const diffDistribution: Record<number, number> = {
     [-3]: 0,
     [-2]: 0,
     [-1]: 0,
-    0: 0,
     1: 0,
     2: 0,
     3: 0,
@@ -43,7 +42,6 @@ export const SlideMacroCard: React.FC<SlideMacroCardProps> = ({
   });
 
   const getDiffBadgeClass = (diff: number) => {
-    if (diff === 0) return 'badge-pull';
     if (Math.abs(diff) === 1) return 'badge-slide';
     if (Math.abs(diff) === 2) return 'badge-gold';
     return 'badge-recovery';
@@ -76,11 +74,10 @@ export const SlideMacroCard: React.FC<SlideMacroCardProps> = ({
           <span>計 {macroSlideFlows.length} 箇所</span>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px' }}>
-          {[-3, -2, -1, 0, 1, 2, 3].map((diff) => {
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '4px' }}>
+          {[-3, -2, -1, 1, 2, 3].map((diff) => {
             const count = diffDistribution[diff] || 0;
             const sign = diff > 0 ? `+${diff}` : `${diff}`;
-            const label = diff === 0 ? '同数' : sign;
             return (
               <div
                 key={`diff-${diff}`}
@@ -95,7 +92,7 @@ export const SlideMacroCard: React.FC<SlideMacroCardProps> = ({
                 }}
               >
                 <div style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                  {label}
+                  {sign}
                 </div>
                 <div
                   style={{
@@ -173,7 +170,7 @@ export const SlideMacroCard: React.FC<SlideMacroCardProps> = ({
                   </div>
 
                   <span className={`badge ${badgeClass}`} style={{ fontSize: '10px', padding: '1px 6px' }}>
-                    {flow.diff === 0 ? '重複' : sign}
+                    {sign}
                   </span>
                 </div>
               );

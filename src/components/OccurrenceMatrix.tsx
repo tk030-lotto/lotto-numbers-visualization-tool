@@ -45,9 +45,9 @@ export const OccurrenceMatrix: React.FC<OccurrenceMatrixProps> = ({
     { key: '31+', label: `31〜${maxNum}`, min: 31, max: maxNum },
   ].filter((z) => z.key === 'all' || (z.min !== undefined && z.min <= maxNum));
 
-  // 表示対象数字リストの生成（ゾーンフィルター適用）
+  // 表示対象数字リストの生成（ロト系のみゾーンフィルター適用）
   const numbersList: number[] = [];
-  const activeZone = zoneOptions.find((z) => z.key === selectedZone);
+  const activeZone = isLoto ? zoneOptions.find((z) => z.key === selectedZone) : undefined;
 
   for (let n = minNum; n <= maxNum; n++) {
     if (activeZone && activeZone.min !== undefined && activeZone.max !== undefined) {
@@ -162,11 +162,20 @@ export const OccurrenceMatrix: React.FC<OccurrenceMatrixProps> = ({
                 <th
                   key={`th-${num}`}
                   onClick={() => onNumberClick && onNumberClick(num)}
+                  onKeyDown={(e) => {
+                    if (onNumberClick && (e.key === 'Enter' || e.key === ' ')) {
+                      e.preventDefault();
+                      onNumberClick(num);
+                    }
+                  }}
+                  tabIndex={onNumberClick ? 0 : undefined}
+                  role={onNumberClick ? 'button' : undefined}
                   style={{
                     minWidth: isLoto ? '26px' : '36px',
                     cursor: onNumberClick ? 'pointer' : 'default',
                     borderRight: isGroupBorder(num) ? '2px solid var(--border-color-hover)' : undefined,
                     padding: '6px 2px',
+                    outline: 'none',
                   }}
                   title={`数字 ${num} の詳細`}
                 >
@@ -243,11 +252,20 @@ export const OccurrenceMatrix: React.FC<OccurrenceMatrixProps> = ({
                         <span
                           className={`num-ball ${ballType}`}
                           onClick={() => onNumberClick && onNumberClick(num)}
+                          onKeyDown={(e) => {
+                            if (onNumberClick && (e.key === 'Enter' || e.key === ' ')) {
+                              e.preventDefault();
+                              onNumberClick(num);
+                            }
+                          }}
+                          tabIndex={onNumberClick ? 0 : undefined}
+                          role={onNumberClick ? 'button' : undefined}
                           style={{
                             width: isLoto ? '22px' : '26px',
                             height: isLoto ? '22px' : '26px',
                             fontSize: isLoto ? '10px' : '12px',
                             cursor: onNumberClick ? 'pointer' : 'default',
+                            outline: 'none',
                           }}
                           title={`第${row.round}回: 数字 ${num} (${cell.isPull ? '引っ張り' : cell.isSlide ? 'スライド' : cell.isBonus ? 'ボーナス' : '通常'})`}
                         >

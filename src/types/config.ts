@@ -30,21 +30,4 @@ export interface GameConfig {
 /** 出目表表示モード */
 export type MatrixDisplayMode = 'desktop' | 'mobile';
 
-/** 出目表フィルターオプション */
-export interface MatrixFilters {
-  highlightPull: boolean;    // 引っ張り (青)
-  highlightSlide: boolean;   // スライド (緑)
-  highlightNormal: boolean;  // 通常当選 (黄)
-  highlightOdd: boolean;     // 奇数
-  highlightEven: boolean;    // 偶数
-  selectedDigitZone: number | null; // 数字帯フィルター (1: 1-10, 2: 11-20 等)
-}
 
-/** アプリケーション全域の表示設定 */
-export interface ViewSettings {
-  selectedGame: GameKey;
-  analysisRounds: number;    // 集計回数 (10〜100)
-  baseRound: number | null;  // 基準回号 (null時は最新)
-  matrixMode: MatrixDisplayMode;
-  filters: MatrixFilters;
-}

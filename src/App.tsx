@@ -46,29 +46,37 @@ export const App: React.FC = () => {
   const currentConfig = GAME_CONFIGS[selectedGame];
 
   // 2. データ取得処理
-  const loadData = useCallback(async (gameKey: GameKey) => {
+  const loadData = useCallback(async (gameKey: GameKey, isCancelled?: () => boolean) => {
     setIsLoading(true);
     setSyncStatus('syncing');
     setErrorMsg(null);
 
     try {
       const resp = await fetchLotteryData(gameKey);
+      if (isCancelled && isCancelled()) return;
+
       if (resp && resp.data && resp.data.length > 0) {
         setAllRounds(resp.data);
         setLastUpdated(resp.updatedAt);
-        setSyncStatus('synced');
+        setSyncStatus(resp.status);
+        if (resp.status !== 'synced' && resp.errorMessage) {
+          setErrorMsg(`オンライン同期に失敗したため、${resp.updatedAt.includes('キャッシュ') ? 'オフラインキャッシュ' : '内蔵データ'}を使用しています。`);
+        }
       } else {
-        // フォールバック
-        setAllRounds(PRELOAD_DATA_MAP[gameKey]);
+        setAllRounds(PRELOAD_DATA_MAP[gameKey] || []);
         setSyncStatus('offline');
+        setErrorMsg('データが取得できなかったため、内蔵データを使用しています。');
       }
     } catch (err) {
+      if (isCancelled && isCancelled()) return;
       console.error('Data fetch error:', err);
-      setAllRounds(PRELOAD_DATA_MAP[gameKey]);
+      setAllRounds(PRELOAD_DATA_MAP[gameKey] || []);
       setSyncStatus('error');
       setErrorMsg('オンライン同期に失敗したため、内蔵データを使用しています。');
     } finally {
-      setIsLoading(false);
+      if (!isCancelled || !isCancelled()) {
+        setIsLoading(false);
+      }
     }
   }, []);
 
@@ -78,12 +86,15 @@ export const App: React.FC = () => {
     setSelectedGame(game);
     setBaseRoundIndex(0); // 基準回を最新にリセット
     setSelectedNumberForModal(null);
-    loadData(game);
   };
 
-  // 初回データ読み込み
+  // くじ種変更時・初期化時のデータ読み込み（レースコンディション防止）
   useEffect(() => {
-    loadData(selectedGame);
+    let cancelled = false;
+    loadData(selectedGame, () => cancelled);
+    return () => {
+      cancelled = true;
+    };
   }, [loadData, selectedGame]);
 
   // 3. 統合構造解析の実行 (useMemoで最適化)

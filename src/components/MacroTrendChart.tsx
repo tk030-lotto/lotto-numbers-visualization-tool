@@ -25,6 +25,61 @@ interface MacroTrendChartProps {
   gameConfig: GameConfig;
 }
 
+// カスタムツールチップコンポーネント
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{
+    payload: {
+      round: number;
+      roundLabel: string;
+      date: string;
+      sum: number;
+      isGolden: boolean;
+      numbers: string;
+    };
+  }>;
+  isLoto?: boolean;
+}
+
+const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, isLoto }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div
+        className="card"
+        style={{
+          backgroundColor: 'rgba(18, 18, 21, 0.95)',
+          borderColor: 'var(--border-color-hover)',
+          padding: '8px 12px',
+          fontSize: '12px',
+          boxShadow: 'var(--shadow-md)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+          <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{data.roundLabel}</span>
+          <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>{data.date}</span>
+        </div>
+        <div style={{ marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ color: 'var(--text-secondary)' }}>当選数字:</span>
+          <span className="font-mono" style={{ color: 'var(--accent-amber)' }}>{data.numbers}</span>
+        </div>
+        <div style={{ marginTop: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ color: 'var(--text-secondary)' }}>合計値:</span>
+          <span className="font-mono" style={{ fontWeight: 700, color: data.isGolden ? 'var(--accent-emerald)' : 'var(--text-primary)' }}>
+            {data.sum}
+          </span>
+          {data.isGolden && (
+            <span className="badge badge-slide" style={{ fontSize: '10px', padding: '0 4px' }}>
+              {isLoto ? '黄金ゾーン' : '期待値ゾーン'}
+            </span>
+          )}
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
+
 export const MacroTrendChart: React.FC<MacroTrendChartProps> = ({
   metricsList,
   gameConfig,
@@ -43,60 +98,6 @@ export const MacroTrendChart: React.FC<MacroTrendChartProps> = ({
   const goldenMin = gameConfig.sumThresholds.expectedMin;
   const goldenMax = gameConfig.sumThresholds.expectedMax;
   const expectedSum = gameConfig.sumThresholds.centerAverage;
-
-  // カスタムツールチップ
-  interface CustomTooltipProps {
-    active?: boolean;
-    payload?: Array<{
-      payload: {
-        round: number;
-        roundLabel: string;
-        date: string;
-        sum: number;
-        isGolden: boolean;
-        numbers: string;
-      };
-    }>;
-  }
-
-  const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div
-          className="card"
-          style={{
-            backgroundColor: 'rgba(18, 18, 21, 0.95)',
-            borderColor: 'var(--border-color-hover)',
-            padding: '8px 12px',
-            fontSize: '12px',
-            boxShadow: 'var(--shadow-md)',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
-            <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{data.roundLabel}</span>
-            <span style={{ color: 'var(--text-muted)', fontSize: '11px' }}>{data.date}</span>
-          </div>
-          <div style={{ marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ color: 'var(--text-secondary)' }}>当選数字:</span>
-            <span className="font-mono" style={{ color: 'var(--accent-amber)' }}>{data.numbers}</span>
-          </div>
-          <div style={{ marginTop: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ color: 'var(--text-secondary)' }}>合計値:</span>
-            <span className="font-mono" style={{ fontWeight: 700, color: data.isGolden ? 'var(--accent-emerald)' : 'var(--text-primary)' }}>
-              {data.sum}
-            </span>
-            {data.isGolden && (
-              <span className="badge badge-slide" style={{ fontSize: '10px', padding: '0 4px' }}>
-                {isLoto ? '黄金ゾーン' : '期待値ゾーン'}
-              </span>
-            )}
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
 
   return (
     <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -134,7 +135,6 @@ export const MacroTrendChart: React.FC<MacroTrendChartProps> = ({
             <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" />
             <XAxis
               dataKey="round"
-              tickFormatter={(r) => `${r}`}
               stroke="var(--text-muted)"
               fontSize={11}
               tickLine={false}
@@ -145,7 +145,7 @@ export const MacroTrendChart: React.FC<MacroTrendChartProps> = ({
               tickLine={false}
               domain={['auto', 'auto']}
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip isLoto={isLoto} />} />
 
             {/* ロトの黄金ゾーンエリア */}
             {isLoto && (

@@ -27,13 +27,15 @@ export interface NumbersRound {
 /** 統合抽選結果データ型 */
 export type LotteryRound = LotoRound | NumbersRound;
 
-/** データ取得APIレスポンス型 */
-export interface DataHubResponse {
-  gameKey: GameKey;
-  updatedAt: string;
-  totalRounds: number;
-  data: LotteryRound[];
+/** データ取得APIレスポンス型 (オブジェクト形式またはトップレベル配列形式) */
+export interface DataHubObjectResponse {
+  gameKey?: GameKey;
+  updatedAt?: string;
+  totalRounds?: number;
+  data?: LotteryRound[];
 }
+
+export type DataHubResponse = DataHubObjectResponse | LotteryRound[];
 
 /** 同期ステータス */
 export type SyncStatus = 'synced' | 'syncing' | 'offline' | 'error';

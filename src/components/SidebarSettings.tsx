@@ -39,6 +39,9 @@ export const SidebarSettings: React.FC<SidebarSettingsProps> = ({
   const maxAvailable = allRounds.length;
   const currentBaseRound = allRounds[baseRoundIndex];
 
+  const maxCount = Math.min(100, Math.max(10, maxAvailable));
+  const midCount = Math.round((10 + maxCount) / 2);
+
   return (
     <aside
       style={{
@@ -66,15 +69,15 @@ export const SidebarSettings: React.FC<SidebarSettingsProps> = ({
         <input
           type="range"
           min={10}
-          max={Math.min(100, Math.max(10, maxAvailable))}
+          max={maxCount}
           step={5}
           value={analysisCount}
           onChange={(e) => onAnalysisCountChange(Number(e.target.value))}
         />
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: 'var(--text-muted)', marginTop: '4px' }}>
           <span>10回</span>
-          <span>50回</span>
-          <span>100回</span>
+          <span>{midCount}回</span>
+          <span>{maxCount}回</span>
         </div>
       </div>
 
@@ -90,7 +93,7 @@ export const SidebarSettings: React.FC<SidebarSettingsProps> = ({
           onChange={(e) => onBaseRoundIndexChange(Number(e.target.value))}
           style={{ width: '100%', marginBottom: '8px' }}
         >
-          {allRounds.slice(0, 50).map((r, idx) => (
+          {allRounds.slice(0, Math.min(100, allRounds.length)).map((r, idx) => (
             <option key={r.round} value={idx}>
               {idx === 0 ? `最新: 第${r.round}回 (${r.date})` : `第${r.round}回 (${r.date})`}
             </option>

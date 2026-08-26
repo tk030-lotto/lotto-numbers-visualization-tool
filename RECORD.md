@@ -102,7 +102,27 @@
 - **表示モード切替（PC / スマホ）機能追加 & 「F式」表記除去**:
   - ヘッダーおよび出目表に「🖥️ PC表示」/「📱 スマホ表示」のワンクリック切替トグルを実装
   - スマホモード時の高密度出目表マトリクスおよびロト系「数字帯（1〜10、11〜20等）ゾーン絞り込みタブ」を新設
-  - UIおよびMarkdownレポートから「F式」表記を除去し、「出現頻度分類」へ標準化
-- **Gitマイクロコミット**:
-  - 全Phaseの完成コード・テスト・ドキュメント・起動スクリプトをGitへマイクロコミット完了
+## 2026-08-26 コードレビュー指摘事項 全修正完了（v1.1.0）
+- **Critical & High（重大バグ・ステータス改善）**:
+  - `src/utils/dataFetcher.ts`: lotto-data-hub リモートAPIのトップレベル配列レスポンス対応および行単位バリデーション（`isValidLotteryRound`）を実装（C-1, M-2解消）
+  - `src/types/lottery.ts`: `DataHubResponse` / `DataHubObjectResponse` 型の拡張
+  - `src/App.tsx`: `FetchResult.status`（'synced' / 'offline' / 'error'）のUI正確反映とオフライン/エラー警告バナーの連携（H-1解消）
+  - `src/App.tsx`: 非同期中断フラグ（`cancelled`）によるくじ種切り替えレースコンディション防止および二重フェッチ解消（H-2, L-4解消）
+- **Medium（エッジケース・堅牢性改善）**:
+  - `src/components/OccurrenceMatrix.tsx`: ナンバーズ切り替え時にゾーンフィルターが適用されず空テーブルになる問題を解消（M-1解消）
+  - `src/utils/dataFetcher.ts`: ネットワーク障害時にTTL切れメモリキャッシュ（Stale Cache）を優先活用する耐障害性向上（M-3解消）
+- **Low（品質・設定・ドキュメント改善）**:
+  - `src/types/config.ts`: 未使用デッド型（`MatrixFilters`, `ViewSettings`）の削除（L-1解消）
+  - `package.json`: `tsx` 依存追加および `"test"` スクリプト配備（L-2解消）
+  - `vite.config.ts`: `manualChunks`（vendor / recharts / lucide）および `chunkSizeWarningLimit` 設定によるビルド最適化（L-3解消）
+  - `src/components/SidebarSettings.tsx`: スライダー目盛の動的化および基準回号セレクタを最大100回まで拡張（L-5解消）
+  - `src/components/OccurrenceMatrix.tsx`: テーブルヘッダーおよび数字ボールにキーボード操作アクセシビリティ（`onKeyDown`, `tabIndex`, `role`）を追加（L-6解消）
+  - `src/components/SlideMacroCard.tsx`: スライドマクロ内の diff=0（同数）デッドコードおよび分布表示の整理（L-7解消）
+  - `src/components/MacroTrendChart.tsx`: `CustomTooltip` のコンポーネント外配置および不要フォーマッタ削除（L-8解消）
+  - `src/utils/dataFetcher.ts`: プリロード先頭日付からの動的導出によるマジックナンバー排除（L-9解消）
+  - `README.md`, `SPECIFICATION.md`: バージョン（1.1.0）およびタブ順表記（N4→N3）の整合性統一（L-10解消）
+- **品質検証**:
+  - `npx tsc --noEmit`: エラー0件
+  - `npm test`: 全テスト合格（単体計算テスト 33/33 + Phase 6 受入テスト全項目）
+  - `npm run build`: 警告ゼロ・9.27秒で本番ビルド成功
 
