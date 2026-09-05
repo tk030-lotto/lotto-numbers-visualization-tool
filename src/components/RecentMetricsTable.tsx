@@ -41,7 +41,7 @@ export const RecentMetricsTable: React.FC<RecentMetricsTableProps> = ({
       </p>
 
       {/* Table Container */}
-      <div style={{ maxHeight: '380px', overflowY: 'auto', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
+      <div style={{ maxHeight: '380px', overflow: 'auto', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)' }}>
         <table
           style={{
             width: '100%',

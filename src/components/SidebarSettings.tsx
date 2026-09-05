@@ -43,18 +43,7 @@ export const SidebarSettings: React.FC<SidebarSettingsProps> = ({
   const midCount = Math.round((10 + maxCount) / 2);
 
   return (
-    <aside
-      style={{
-        width: '280px',
-        backgroundColor: 'var(--bg-card)',
-        borderRight: '1px solid var(--border-color)',
-        padding: '16px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
-        flexShrink: 0,
-      }}
-    >
+    <aside className="sidebar-aside">
       {/* Section 1: Analysis Target Count */}
       <div className="card-inset">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>

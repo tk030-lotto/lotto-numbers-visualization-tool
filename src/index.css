@@ -150,6 +150,14 @@ html, body {
   .main-layout { flex-direction: column; }
   .grid-2 { grid-template-columns: 1fr; }
   .grid-4 { grid-template-columns: 1fr; }
+  .sidebar-aside {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+  }
+  .content-area {
+    padding: 12px;
+  }
 }
 
 /* Animations */

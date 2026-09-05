@@ -35,6 +35,25 @@ export const App: React.FC = () => {
   const [displayMode, setDisplayMode] = useState<MatrixDisplayMode>(() => {
     return typeof window !== 'undefined' && window.innerWidth <= 768 ? 'mobile' : 'desktop';
   });
+  const [userOverride, setUserOverride] = useState<boolean>(false);
+
+  // リサイズ時の自動表示モード同期（手動切り替え優先）
+  useEffect(() => {
+    const handleResize = () => {
+      if (!userOverride) {
+        const newMode = window.innerWidth <= 768 ? 'mobile' : 'desktop';
+        setDisplayMode(newMode);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [userOverride]);
+
+  // 手動切り替え時はユーザー選択を優先保持
+  const handleManualDisplayModeChange = useCallback((mode: MatrixDisplayMode) => {
+    setUserOverride(true);
+    setDisplayMode(mode);
+  }, []);
 
   // データ同期状態
   const [allRounds, setAllRounds] = useState<LotteryRound[]>(PRELOAD_DATA_MAP['loto7']);
@@ -120,7 +139,7 @@ export const App: React.FC = () => {
         onRefresh={() => loadData(selectedGame)}
         isLoading={isLoading}
         displayMode={displayMode}
-        onToggleDisplayMode={setDisplayMode}
+        onToggleDisplayMode={handleManualDisplayModeChange}
       />
 
       {/* Main Layout: Sidebar + Content Area */}
@@ -225,7 +244,7 @@ export const App: React.FC = () => {
                 highlightFilter={highlightFilter}
                 onNumberClick={(num) => setSelectedNumberForModal(num)}
                 displayMode={displayMode}
-                onToggleDisplayMode={setDisplayMode}
+                onToggleDisplayMode={handleManualDisplayModeChange}
               />
 
               {/* 6. Recent Metrics Detail Grid */}

@@ -278,6 +278,35 @@ select:focus {
   font-size: 9px !important;
 }
 
-.mode-mobile {
+/* ==========================================================================
+   Sidebar / Layout Mode Mobile Styles
+   ========================================================================== */
+
+/* Sidebar base class (replaces inline styles in SidebarSettings.tsx) */
+.sidebar-aside {
+  width: 280px;
+  flex-shrink: 0;
+  background-color: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Manual Mobile Mode (PC幅で「スマホ」ボタン押下時) */
+.main-layout.mode-mobile {
+  flex-direction: column !important;
+}
+
+.main-layout.mode-mobile .sidebar-aside {
+  width: 100% !important;
+  border-right: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.main-layout.mode-mobile .grid-2,
+.main-layout.mode-mobile .grid-3,
+.main-layout.mode-mobile .grid-4 {
   grid-template-columns: 1fr !important;
 }
