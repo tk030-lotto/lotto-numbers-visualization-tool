@@ -134,3 +134,19 @@
   - 開発サーバー（ポート3000）起動および HTTP 疎通・レスポンス正常確認
 - **Gitリポジトリ管理**:
   - 作業ツリーの同期およびリモートリポジトリ（GitHub mainブランチ）へのコミット・プッシュ
+
+## 2026-09-06 PC/スマホ表示切り替え改修 & GitHub Pagesデプロイ完了
+- **PC/スマホ表示切り替え不具合の解消**:
+  - `src/components.css`: `.main-layout.mode-mobile` 適用時に確実に `flex-direction: column`（縦積み）および `.grid-2, .grid-3, .grid-4` を 1fr（単一列）にするスタイルを整備
+  - `src/components.css`: サイドバー用レスポンシブ共通クラス `.sidebar-aside` を新設
+  - `src/index.css`: `@media (max-width: 768px)` 内に `.sidebar-aside` の全幅化（`width: 100%`）および下部ボーダー化を追加
+  - `src/components/SidebarSettings.tsx`: インラインハードコード（`width: 280px`）を撤廃し `.sidebar-aside` を適用
+  - `src/components/RecentMetricsTable.tsx`: テーブル親コンテナに `overflow: auto` を明示し、スマホ画面幅での横スクロールを保証
+  - `src/App.tsx`: ウィンドウリサイズ（`resize`）監視リスナーを追加し、画面幅変更時の自動同期と手動切り替え（`userOverride`）の優先連動を実装
+- **リポジトリのパブリック化**:
+  - GitHub CLI によりリポジトリ（`tk030-lotto/lotto-numbers-visualization-tool`）を Private から Public に変更完了
+- **GitHub Pagesデプロイ自動化**:
+  - `.github/workflows/deploy.yml`（GitHub Actions 自動ビルド・テスト・デプロイワークフロー）を配備
+  - GitHub Pages を `build_type: workflow` で有効化
+  - ワークフロー実行成功（Run ID: 33999757439、所要時間28秒）
+  - 公開URL疎通確認（HTTP 200、正常配信確認）: `https://tk030-lotto.github.io/lotto-numbers-visualization-tool/`

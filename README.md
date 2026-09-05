@@ -1,5 +1,9 @@
 # ロト＆ナンバーズ 統合構造解析・可視化ツール
 
+[![Deploy to GitHub Pages](https://github.com/tk030-lotto/lotto-numbers-visualization-tool/actions/workflows/deploy.yml/badge.svg)](https://github.com/tk030-lotto/lotto-numbers-visualization-tool/actions/workflows/deploy.yml)
+
+🌐 **公開URL (GitHub Pages)**: [https://tk030-lotto.github.io/lotto-numbers-visualization-tool/](https://tk030-lotto.github.io/lotto-numbers-visualization-tool/)
+
 ロト（ロト7・ロト6・ミニロト）およびナンバーズ（ナンバーズ4・ナンバーズ3）の過去出目データを解析・可視化するWebアプリケーションです。  
 ※本ツールは買い目の自動生成・予想ではなく、過去出目データの純粋な構造解析・パターン分析・出目表可視化を目的としています。
 
