@@ -152,4 +152,9 @@
   - 公開URL疎通確認（HTTP 200、正常配信確認）: `https://tk030-lotto.github.io/lotto-numbers-visualization-tool/`
 - **GitHubリポジトリAbout設定**:
   - Description（説明文）、Website（公開URL）、Topics（react, typescript, vite, data-visualization, lottery, loto, numbers）を完全設定
+- **note & X (Twitter) 兼用デモGIF生成**:
+  - 16:9比率（960×540）、容量0.93MB（10MB未満完全準拠）で `demo.gif` を生成・配置
+  - ロト7統合レポート、出目表マトリクス、ナンバーズ4桁別ヒートマップ、スマホ最適化モードの4シーンループアニメーションを収録
+  - `README.md` にデモGIF埋め込みリンクを追加
+
 
