@@ -48,3 +48,8 @@ GEMINI.md
 # Tests
 __tests__/
 *.test.ts
+
+# 開発ドキュメント（個人パス混入防止）
+HANDOVER_SUMMARY.md
+SCHEDULE.md
+audit_plan.md
