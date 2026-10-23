@@ -53,3 +53,6 @@ __tests__/
 HANDOVER_SUMMARY.md
 SCHEDULE.md
 audit_plan.md
+
+# 開発ドキュメント除外（フェーズ2-B）
+CODE_REVIEW_REPORT*.md
