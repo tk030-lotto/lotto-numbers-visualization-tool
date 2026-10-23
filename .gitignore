@@ -56,3 +56,6 @@ audit_plan.md
 
 # 開発ドキュメント除外（フェーズ2-B）
 CODE_REVIEW_REPORT*.md
+
+# 個人パス混入ドキュメント除外（フェーズ2-C-α）
+SPECIFICATION.md
