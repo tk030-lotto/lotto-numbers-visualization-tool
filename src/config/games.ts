@@ -22,7 +22,8 @@ export const GAME_CONFIGS: Record<GameKey, GameConfig> = {
       expectedMax: 155,    // 黄金ゾーン上限
       centerAverage: 133,  // 中央期待値
     },
-    dataUrl: 'https://tk030-lotto.github.io/lotto-data-hub/data/loto7.json',
+    dataUrl: 'https://raw.githubusercontent.com/tk030-lotto/lotto-data-hub/main/data/loto7.json',
+    fallbackDataUrl: 'https://zero-dev.jp/lotto-data-hub/data/loto7.json',
   },
   loto6: {
     key: 'loto6',
@@ -39,7 +40,8 @@ export const GAME_CONFIGS: Record<GameKey, GameConfig> = {
       expectedMax: 155,    // 黄金ゾーン上限
       centerAverage: 132,  // 中央期待値
     },
-    dataUrl: 'https://tk030-lotto.github.io/lotto-data-hub/data/loto6.json',
+    dataUrl: 'https://raw.githubusercontent.com/tk030-lotto/lotto-data-hub/main/data/loto6.json',
+    fallbackDataUrl: 'https://zero-dev.jp/lotto-data-hub/data/loto6.json',
   },
   miniloto: {
     key: 'miniloto',
@@ -56,7 +58,8 @@ export const GAME_CONFIGS: Record<GameKey, GameConfig> = {
       expectedMax: 95,     // 黄金ゾーン上限
       centerAverage: 80,   // 中央期待値
     },
-    dataUrl: 'https://tk030-lotto.github.io/lotto-data-hub/data/miniloto.json',
+    dataUrl: 'https://raw.githubusercontent.com/tk030-lotto/lotto-data-hub/main/data/miniloto.json',
+    fallbackDataUrl: 'https://zero-dev.jp/lotto-data-hub/data/miniloto.json',
   },
   numbers3: {
     key: 'numbers3',
@@ -73,7 +76,8 @@ export const GAME_CONFIGS: Record<GameKey, GameConfig> = {
       expectedMax: 17,     // 期待値ゾーン上限
       centerAverage: 13.5, // 中央期待値
     },
-    dataUrl: 'https://tk030-lotto.github.io/lotto-data-hub/data/numbers3.json',
+    dataUrl: 'https://raw.githubusercontent.com/tk030-lotto/lotto-data-hub/main/data/numbers3.json',
+    fallbackDataUrl: 'https://zero-dev.jp/lotto-data-hub/data/numbers3.json',
   },
   numbers4: {
     key: 'numbers4',
@@ -90,7 +94,8 @@ export const GAME_CONFIGS: Record<GameKey, GameConfig> = {
       expectedMax: 22,     // 期待値ゾーン上限
       centerAverage: 18.0, // 中央期待値
     },
-    dataUrl: 'https://tk030-lotto.github.io/lotto-data-hub/data/numbers4.json',
+    dataUrl: 'https://raw.githubusercontent.com/tk030-lotto/lotto-data-hub/main/data/numbers4.json',
+    fallbackDataUrl: 'https://zero-dev.jp/lotto-data-hub/data/numbers4.json',
   },
 };
 

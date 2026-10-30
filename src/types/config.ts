@@ -25,6 +25,7 @@ export interface GameConfig {
   bonusCount: number;       // ロト7: 2, ロト6: 1, ミニ: 1, ナンバーズ: 0
   sumThresholds: SumThresholds;
   dataUrl: string;
+  fallbackDataUrl?: string;
 }
 
 /** 出目表表示モード */
