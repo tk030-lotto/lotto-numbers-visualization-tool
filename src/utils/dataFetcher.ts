@@ -40,16 +40,13 @@ function isValidLotteryRound(item: unknown): item is LotteryRound {
 /**
  * 指定されたURLからJSONデータを取得してパースするヘルパー関数
  */
-async function fetchFromUrl(url: string, timeoutMs = 6000): Promise<{ rows: unknown[]; updatedAt?: string }> {
+async function fetchFromUrl(url: string, timeoutMs = 10000): Promise<{ rows: unknown[]; updatedAt?: string }> {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const response = await fetch(url, {
       signal: controller.signal,
-      headers: {
-        Accept: 'application/json, text/plain, */*',
-      },
     });
 
     if (!response.ok) {
